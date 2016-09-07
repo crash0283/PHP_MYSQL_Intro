@@ -15,6 +15,13 @@
     
 
     if (array_key_exists('arrive', $_POST) OR array_key_exists('depart', $_POST)) {
+        
+        if ($_POST['arrive'] == '' || $_POST['depart'] == '') {
+            echo "Please Choose Reservation Dates!";
+        } else {
+            
+
+        
 
         $query = "SELECT `id` FROM `reserve` WHERE `checkOut` > date('".mysqli_escape_string($connect, $_POST['arrive'])."')";
 
@@ -38,43 +45,47 @@
             }
             
         }
+        }
 
     }
     
     
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Test Database</title>
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script type="text/javascript" src="datedropper.js"></script>
-    <script type="text/javascript" src="flatpickr-gh-pages/dist/flatpickr.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="flatpickr-gh-pages/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="datedropper.css">
-</head>
-<body>
-<form method="post">
-    <input id="arrive" name="arrive" type="text" placeholder="Arrive" required>
-    <input id="depart" name="depart" type="text" placeholder="Depart" required>
-    <input type="submit" name="Search" value="Search">
-</form>
-<script type="text/javascript">
-    var check_in = $("#arrive").flatpickr({
-        altInput: true,
-        altFormat: "Y-m-d",
-        minDate: new Date()
-    });
+    <!DOCTYPE html>
+    <html>
 
-    var check_out = $("#depart").flatpickr({
-        altInput: true,
-        altFormat: "Y-m-d",
-        minDate: new Date()
-    });
+    <head>
+        <title>Test Database</title>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="datedropper.js"></script>
+        <script type="text/javascript" src="flatpickr-gh-pages/dist/flatpickr.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="flatpickr-gh-pages/dist/flatpickr.min.css">
+        <link rel="stylesheet" type="text/css" href="datedropper.css">
+    </head>
 
-    check_in.config.onChange = dateObj => check_out.set("minDate", dateObj.fp_incr(1));
-    check_out.config.onChange = dateObj => check_in.set("maxDate", dateObj.fp_incr(-1));
-</script>
-</body>
-</html>
+    <body>
+        <form method="post">
+            <input id="arrive" name="arrive" type="text" placeholder="Arrive" required>
+            <input id="depart" name="depart" type="text" placeholder="Depart" required>
+            <input type="submit" name="Search" value="Search">
+        </form>
+        <script type="text/javascript">
+            var check_in = $("#arrive").flatpickr({
+                altInput: true,
+                altFormat: "Y-m-d",
+                minDate: new Date()
+            });
+
+            var check_out = $("#depart").flatpickr({
+                altInput: true,
+                altFormat: "Y-m-d",
+                minDate: new Date()
+            });
+
+            check_in.config.onChange = dateObj => check_out.set("minDate", dateObj.fp_incr(1));
+            check_out.config.onChange = dateObj => check_in.set("maxDate", dateObj.fp_incr(-1));
+        </script>
+    </body>
+
+    </html>
