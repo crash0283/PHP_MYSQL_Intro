@@ -4,24 +4,24 @@
     $user_name  = "dbo645906944";
     $password   = "Jbuffett83!";
 
-    
+
     $connect = mysqli_connect($host_name, $user_name, $password, $database);
-    
+
     if(mysqli_connect_errno())
     {
       die("'Connection Failed!'.mysqli_connect_error().");
     }
 
-    
+
 
     if (array_key_exists('arrive', $_POST) OR array_key_exists('depart', $_POST)) {
-        
+
         if ($_POST['arrive'] == '' || $_POST['depart'] == '') {
             echo "Please Choose Reservation Dates!";
         } else {
-            
 
-        
+
+
 
         $query = "SELECT `id` FROM `reserve` WHERE `checkOut` > date('".mysqli_escape_string($connect, $_POST['arrive'])."')";
 
@@ -30,7 +30,7 @@
 
         if (mysqli_num_rows($result) > 0) {
             echo "That date has already been taken!";
-        } 
+        }
 
         else {
 
@@ -38,18 +38,18 @@
 
             if(mysqli_query($connect,$query)) {
                 echo "Thanks For Your Reservation!  We Hope You Enjoy Your Stay!";
-            } 
+            }
 
             else {
                 echo "Please Try Again!";
             }
-            
+
         }
         }
 
     }
-    
-    
+
+
 ?>
 
     <!DOCTYPE html>
@@ -60,7 +60,7 @@
         <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="datedropper.js"></script>
         <script type="text/javascript" src="flatpickr-gh-pages/dist/flatpickr.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="flatpickr-gh-pages/dist/flatpickr.min.css">
+        <link rel="stylesheet" type="text/css" href="flatpickr-gh-pages/dist/flatpickr.material_blue.min.css">
         <link rel="stylesheet" type="text/css" href="datedropper.css">
     </head>
 
