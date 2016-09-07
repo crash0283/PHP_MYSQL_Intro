@@ -31,7 +31,7 @@
 
 
         if (mysqli_num_rows($result) > 0) {
-            $error = "That date has already been taken!";
+            $error = "That date has already been booked!";
         }
 
         else {
@@ -71,21 +71,8 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <form class="form-inline" method="post">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" id="arrive" name="arrive" type="text" placeholder="Arrive">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" id="depart" name="depart" type="text" placeholder="Depart">
-                        </div>
-                    </div>
-                    <input class="btn btn-primary" type="submit" name="Search" value="Search Reservations">
-                </form>
                 <div class="output"><?php 
                     if($alert) {
                         echo '<div class="alert alert-success" role="alert">'.$alert.'</div>';
@@ -95,23 +82,53 @@
                         }?>
                             
                 </div>
+                <form class="form-inline" method="post">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Arrive" id="arrive" name="arrive" data-input>
+                            <span class="input-group-addon">
+                                <a class="input-btn" data-open><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" id="depart" name="depart" type="text" placeholder="Depart" data-input>
+                            <span class="input-group-addon">
+                                <a class="input-btn" data-open><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="Search" value="Search Reservations">
+                </form>
             </div>
         </div>
         <script type="text/javascript">
             var check_in = $("#arrive").flatpickr({
-                altInput: true,
+                allowInputToggle: true,
+                todayHighlight: true,
                 altFormat: "Y-m-d",
+                altInput: true,
+                altInputClass: "form-control",
                 minDate: new Date()
+
             });
 
             var check_out = $("#depart").flatpickr({
-                altInput: true,
+                allowInputToggle: true,
+                todayHighlight: true,
                 altFormat: "Y-m-d",
+                altInput: true,
+                altInputClass: "form-control",
                 minDate: new Date()
+
+        
             });
 
             check_in.config.onChange = dateObj => check_out.set("minDate", dateObj.fp_incr(1));
             check_out.config.onChange = dateObj => check_in.set("maxDate", dateObj.fp_incr(-1));
+
+            
         </script>
     </body>
 

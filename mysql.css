@@ -1,18 +1,23 @@
-.container {
+.container-fluid {
 		
 	text-align: center;
 	margin-top: 100px;
-	width: 450px;
+	width: 1000px;
 }
 
-input {
+.input-group {
 		
 	margin: 20px 20px 0;
 		
 }
 
+
 .alert {
 	font-weight: bold;
+}
+
+.btn {
+	margin-top: 20px;
 }
 
 
